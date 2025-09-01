@@ -1,0 +1,965 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éclat | Modern Fine Dining</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'charcoal': '#333333',
+                        'gold': '#D4AF37',
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .menu-item:hover .menu-item-details {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .timeline-item:not(:last-child):after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 24px;
+            height: 100%;
+            width: 2px;
+            background: #D4AF37;
+        }
+    </style>
+</head>
+<body class="bg-white text-charcoal font-inter">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full bg-white bg-opacity-90 shadow-sm z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-playfair font-bold text-charcoal" onclick="navigateTo('home')">ÉCLAT</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-gold transition" onclick="navigateTo('home')">Home</a>
+                <a href="#" class="hover:text-gold transition" onclick="navigateTo('menu')">Menu</a>
+                <a href="#" class="hover:text-gold transition" onclick="navigateTo('about')">About</a>
+                <a href="#" class="hover:text-gold transition" onclick="navigateTo('reservations')">Reservations</a>
+                <a href="#" class="hover:text-gold transition" onclick="navigateTo('gallery')">Gallery</a>
+                <a href="#" class="hover:text-gold transition" onclick="navigateTo('contact')">Contact</a>
+            </nav>
+            <div class="hidden md:flex space-x-4">
+                <a href="#" class="px-4 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition" onclick="navigateTo('reservations')">Reserve</a>
+                <a href="#" class="px-4 py-2 bg-gold text-white hover:bg-charcoal transition" onclick="navigateTo('menu')">View Menu</a>
+            </div>
+            <button class="md:hidden text-charcoal" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 bg-white z-40 transform -translate-x-full md:hidden pt-20 px-6">
+        <nav class="flex flex-col space-y-6 text-xl">
+            <a href="#" class="border-b border-gray-100 py-3" onclick="navigateTo('home')">Home</a>
+            <a href="#" class="border-b border-gray-100 py-3" onclick="navigateTo('menu')">Menu</a>
+            <a href="#" class="border-b border-gray-100 py-3" onclick="navigateTo('about')">About</a>
+            <a href="#" class="border-b border-gray-100 py-3" onclick="navigateTo('reservations')">Reservations</a>
+            <a href="#" class="border-b border-gray-100 py-3" onclick="navigateTo('gallery')">Gallery</a>
+            <a href="#" class="border-b border-gray-100 py-3" onclick="navigateTo('contact')">Contact</a>
+        </nav>
+        <div class="mt-8 flex space-x-4">
+            <a href="#" class="px-4 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition w-full text-center" onclick="navigateTo('reservations')">Reserve</a>
+            <a href="#" class="px-4 py-2 bg-gold text-white hover:bg-charcoal transition w-full text-center" onclick="navigateTo('menu')">View Menu</a>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="pt-20">
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <!-- Hero Section -->
+            <section class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+                <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                <video autoplay muted loop class="hero-video">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-pouring-wine-into-a-glass-close-up-1749-large.mp4" type="video/mp4">
+                </video>
+                <div class="container mx-auto px-4 z-10">
+                    <h1 class="text-5xl md:text-7xl font-playfair font-bold mb-6">ÉCLAT</h1>
+                    <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Modern fine dining with a focus on seasonal ingredients and innovative techniques.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="#" class="px-8 py-3 bg-gold text-white hover:bg-charcoal transition" onclick="navigateTo('reservations')">Reserve a Table</a>
+                        <a href="#" class="px-8 py-3 border border-white text-white hover:bg-white hover:text-charcoal transition" onclick="navigateTo('menu')">View Menu</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Dishes -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-playfair font-bold mb-4">Signature Creations</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Our chef's selection of seasonal specialties crafted with the finest ingredients.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Dish" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                    <span class="text-white font-semibold">Seasonal</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-playfair font-semibold mb-2">Autumn Truffle Risotto</h3>
+                                <p class="text-gray-600 mb-4">Creamy Arborio rice with fresh black truffle and Parmigiano-Reggiano.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gold font-bold">$32</span>
+                                    <button class="text-sm text-gold hover:underline">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Dish" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                    <span class="text-white font-semibold">Chef's Special</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-playfair font-semibold mb-2">Seared Scallops</h3>
+                                <p class="text-gray-600 mb-4">Perfectly caramelized scallops with cauliflower purée and truffle oil.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gold font-bold">$38</span>
+                                    <button class="text-sm text-gold hover:underline">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Dish" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                    <span class="text-white font-semibold">Dessert</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-playfair font-semibold mb-2">Chocolate Soufflé</h3>
+                                <p class="text-gray-600 mb-4">Warm chocolate soufflé with vanilla bean ice cream and berry coulis.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gold font-bold">$18</span>
+                                    <button class="text-sm text-gold hover:underline">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Snippet -->
+            <section class="py-20 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Restaurant Interior" class="w-full h-auto rounded-lg shadow-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h2 class="text-3xl font-playfair font-bold mb-6">Our Story</h2>
+                            <p class="text-gray-600 mb-4">Founded in 2010, Éclat has redefined modern fine dining in the heart of the city. Our philosophy centers around showcasing the natural flavors of seasonal ingredients through innovative techniques.</p>
+                            <p class="text-gray-600 mb-6">With Chef Alexandre Dubois at the helm, our team creates dishes that are both visually stunning and deeply satisfying to the palate.</p>
+                            <a href="#" class="text-gold font-semibold hover:underline" onclick="navigateTo('about')">Learn More About Us →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Preview -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-playfair font-bold mb-4">Experience Éclat</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">A visual journey through our culinary creations and elegant atmosphere.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="gallery-item overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Restaurant Interior" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Dining Area" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Chef Preparing Food" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1565299624943-b5fbc3e772b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Plated Dish" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <a href="#" class="inline-block px-6 py-3 border border-gold text-gold hover:bg-gold hover:text-white transition" onclick="navigateTo('gallery')">View Full Gallery</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="py-20 bg-charcoal text-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-playfair font-bold mb-4">What Our Guests Say</h2>
+                        <p class="text-gray-300 max-w-2xl mx-auto">Experiences that speak for themselves</p>
+                    </div>
+                    <div class="max-w-4xl mx-auto relative">
+                        <div id="testimonial-slider" class="overflow-hidden">
+                            <div class="flex transition-transform duration-500 ease-in-out" id="testimonial-track">
+                                <div class="testimonial-slide min-w-full px-4">
+                                    <div class="text-center">
+                                        <div class="text-gold text-5xl mb-4">"</div>
+                                        <p class="text-xl mb-6">The tasting menu at Éclat was one of the most memorable dining experiences of my life. Each course was a perfect balance of innovation and tradition.</p>
+                                        <div class="font-playfair font-semibold">— Michael R.</div>
+                                        <div class="text-gray-400 text-sm">Google Review</div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-slide min-w-full px-4">
+                                    <div class="text-center">
+                                        <div class="text-gold text-5xl mb-4">"</div>
+                                        <p class="text-xl mb-6">From the impeccable service to the thoughtfully crafted dishes, every detail at Éclat is executed with precision and care. A true gem in the city's dining scene.</p>
+                                        <div class="font-playfair font-semibold">— Sarah L.</div>
+                                        <div class="text-gray-400 text-sm">TripAdvisor</div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-slide min-w-full px-4">
+                                    <div class="text-center">
+                                        <div class="text-gold text-5xl mb-4">"</div>
+                                        <p class="text-xl mb-6">The wine pairing was exceptional, and the sommelier's knowledge made the experience truly educational. Can't wait to return for their seasonal menu changes.</p>
+                                        <div class="font-playfair font-semibold">— David K.</div>
+                                        <div class="text-gray-400 text-sm">Yelp</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center mt-8 space-x-2">
+                            <button class="w-3 h-3 rounded-full bg-gray-600 focus:bg-gold" onclick="goToTestimonial(0)"></button>
+                            <button class="w-3 h-3 rounded-full bg-gray-600 focus:bg-gold" onclick="goToTestimonial(1)"></button>
+                            <button class="w-3 h-3 rounded-full bg-gray-600 focus:bg-gold" onclick="goToTestimonial(2)"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reservations CTA -->
+            <section class="py-20 bg-gold text-white">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl md:text-4xl font-playfair font-bold mb-6">Reserve Your Table</h2>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">Experience culinary excellence at Éclat. Book your table today for an unforgettable dining experience.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="#" class="px-8 py-3 bg-white text-gold hover:bg-charcoal hover:text-white transition" onclick="navigateTo('reservations')">Book Online</a>
+                        <a href="tel:+15551234567" class="px-8 py-3 border border-white text-white hover:bg-white hover:text-gold transition">Call +1 (555) 123-4567</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Menu Page -->
+        <div id="menu-page" class="page hidden">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">Our Menu</h1>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Seasonal selections crafted with the finest ingredients</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center mb-8 gap-2">
+                        <button class="px-4 py-2 bg-gold text-white" onclick="filterMenu('all')">All</button>
+                        <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100" onclick="filterMenu('starters')">Starters</button>
+                        <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100" onclick="filterMenu('mains')">Mains</button>
+                        <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100" onclick="filterMenu('desserts')">Desserts</button>
+                        <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100" onclick="filterMenu('drinks')">Drinks</button>
+                    </div>
+                    
+                    <div class="max-w-4xl mx-auto">
+                        <!-- Starters -->
+                        <div class="menu-section" data-category="starters">
+                            <h2 class="text-2xl font-playfair font-bold mb-6 pb-2 border-b border-gray-200">Starters</h2>
+                            <div class="space-y-8">
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Foie Gras Terrine</h3>
+                                            <p class="text-gray-600">With brioche toast, seasonal chutney</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$28</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Foie Gras Terrine</h3>
+                                        <p class="text-gray-600 mb-2">House-made duck liver terrine served with toasted brioche and a rotating selection of seasonal fruit chutneys.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$28</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Hamachi Crudo</h3>
+                                            <p class="text-gray-600">With yuzu kosho, avocado, crispy shallots</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$24</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Hamachi Crudo</h3>
+                                        <p class="text-gray-600 mb-2">Fresh yellowtail with yuzu kosho, creamy avocado, crispy shallots, and a drizzle of extra virgin olive oil.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">DF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$24</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Truffle Arancini</h3>
+                                            <p class="text-gray-600">With saffron aioli, aged balsamic</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$18</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Truffle Arancini</h3>
+                                        <p class="text-gray-600 mb-2">Crispy risotto balls infused with black truffle, served with saffron aioli and aged balsamic reduction.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">V</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$18</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mains -->
+                        <div class="menu-section mt-16" data-category="mains">
+                            <h2 class="text-2xl font-playfair font-bold mb-6 pb-2 border-b border-gray-200">Main Courses</h2>
+                            <div class="space-y-8">
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Dry-Aged Ribeye</h3>
+                                            <p class="text-gray-600">12oz, with bone marrow butter, truffle fries</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$58</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Dry-Aged Ribeye</h3>
+                                        <p class="text-gray-600 mb-2">12oz dry-aged ribeye with bone marrow butter, served with truffle-parmesan fries and seasonal vegetables.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$58</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Pan-Seared Halibut</h3>
+                                            <p class="text-gray-600">With artichoke barigoule, saffron nage</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$42</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Pan-Seared Halibut</h3>
+                                        <p class="text-gray-600 mb-2">Perfectly cooked halibut with artichoke barigoule, saffron nage, and herb oil.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">DF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$42</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Mushroom Risotto</h3>
+                                            <p class="text-gray-600">With wild mushrooms, truffle oil, Parmigiano-Reggiano</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$32</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Mushroom Risotto</h3>
+                                        <p class="text-gray-600 mb-2">Creamy Arborio rice with seasonal wild mushrooms, white truffle oil, and aged Parmigiano-Reggiano.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">V</span>
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$32</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Desserts -->
+                        <div class="menu-section mt-16" data-category="desserts">
+                            <h2 class="text-2xl font-playfair font-bold mb-6 pb-2 border-b border-gray-200">Desserts</h2>
+                            <div class="space-y-8">
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Chocolate Soufflé</h3>
+                                            <p class="text-gray-600">With vanilla bean ice cream, berry coulis</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$18</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Chocolate Soufflé</h3>
+                                        <p class="text-gray-600 mb-2">Warm chocolate soufflé with vanilla bean ice cream and seasonal berry coulis.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$18</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Crème Brûlée</h3>
+                                            <p class="text-gray-600">With seasonal fruit compote</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$14</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Crème Brûlée</h3>
+                                        <p class="text-gray-600 mb-2">Classic vanilla bean custard with caramelized sugar crust and seasonal fruit compote.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$14</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Cheese Selection</h3>
+                                            <p class="text-gray-600">Artisanal cheeses, house-made crackers, accompaniments</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$22</span>
+                                    </div>
+                                    <div class="menu-item-details absolute inset-0 bg-white bg-opacity-95 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        <h3 class="text-xl font-semibold mb-2">Cheese Selection</h3>
+                                        <p class="text-gray-600 mb-2">Seasonal selection of artisanal cheeses with house-made crackers, honeycomb, and fruit preserves.</p>
+                                        <div class="flex flex-wrap gap-2 mb-3">
+                                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">GF</span>
+                                        </div>
+                                        <span class="text-gold font-bold">$22</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Drinks -->
+                        <div class="menu-section mt-16" data-category="drinks">
+                            <h2 class="text-2xl font-playfair font-bold mb-6 pb-2 border-b border-gray-200">Drinks</h2>
+                            <div class="space-y-8">
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Signature Cocktails</h3>
+                                            <p class="text-gray-600">Ask your server about our seasonal creations</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$16-18</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Wine by the Glass</h3>
+                                            <p class="text-gray-600">Extensive selection of reds, whites, and sparkling</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$12-25</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Craft Beers</h3>
+                                            <p class="text-gray-600">Local and international selections</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$8-12</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="menu-item group relative">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="text-xl font-semibold">Non-Alcoholic</h3>
+                                            <p class="text-gray-600">House-made sodas, teas, and specialty coffees</p>
+                                        </div>
+                                        <span class="text-gold font-bold">$6-8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-16 bg-gray-50 p-8 rounded-lg text-center">
+                        <h3 class="text-xl font-playfair font-semibold mb-4">Special Requests?</h3>
+                        <p class="text-gray-600 mb-6">We accommodate dietary restrictions and allergies with advance notice. Please inform your server.</p>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="px-3 py-1 bg-gray-200 text-xs rounded-full">Vegetarian (V)</span>
+                            <span class="px-3 py-1 bg-gray-200 text-xs rounded-full">Gluten-Free (GF)</span>
+                            <span class="px-3 py-1 bg-gray-200 text-xs rounded-full">Dairy-Free (DF)</span>
+                            <span class="px-3 py-1 bg-gray-200 text-xs rounded-full">Nut-Free (NF)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about-page" class="page hidden">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">Our Story</h1>
+                        <p class="text-gray-600 max-w-2xl mx-auto">A journey of passion, innovation, and culinary excellence</p>
+                    </div>
+                    
+                    <!-- Timeline -->
+                    <div class="max-w-3xl mx-auto mb-20">
+                        <div class="relative">
+                            <div class="timeline-item relative pl-10 pb-10">
+                                <div class="absolute left-0 w-4 h-4 bg-gold rounded-full z-10"></div>
+                                <h3 class="text-xl font-playfair font-semibold mb-2">2010 - Humble Beginnings</h3>
+                                <p class="text-gray-600">Chef Alexandre Dubois opened Éclat as a small 30-seat bistro with a simple mission: to showcase seasonal ingredients through French technique.</p>
+                            </div>
+                            
+                            <div class="timeline-item relative pl-10 pb-10">
+                                <div class="absolute left-0 w-4 h-4 bg-gold rounded-full z-10"></div>
+                                <h3 class="text-xl font-playfair font-semibold mb-2">2012 - First Recognition</h3>
+                                <p class="text-gray-600">Received our first Michelin star, cementing Éclat's place in the city's culinary scene and allowing for expansion of both kitchen and dining room.</p>
+                            </div>
+                            
+                            <div class="timeline-item relative pl-10 pb-10">
+                                <div class="absolute left-0 w-4 h-4 bg-gold rounded-full z-10"></div>
+                                <h3 class="text-xl font-playfair font-semibold mb-2">2015 - Relocation & Growth</h3>
+                                <p class="text-gray-600">Moved to our current location in the historic district, featuring an open kitchen, private dining room, and expanded wine cellar.</p>
+                            </div>
+                            
+                            <div class="timeline-item relative pl-10 pb-10">
+                                <div class="absolute left-0 w-4 h-4 bg-gold rounded-full z-10"></div>
+                                <h3 class="text-xl font-playfair font-semibold mb-2">2018 - Second Star</h3>
+                                <p class="text-gray-600">Awarded a second Michelin star for our innovative tasting menus that blend French technique with global influences.</p>
+                            </div>
+                            
+                            <div class="timeline-item relative pl-10">
+                                <div class="absolute left-0 w-4 h-4 bg-gold rounded-full z-10"></div>
+                                <h3 class="text-xl font-playfair font-semibold mb-2">Present - Continuing Excellence</h3>
+                                <p class="text-gray-600">Today, Éclat continues to push boundaries while maintaining our commitment to quality, seasonality, and memorable dining experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chef Section -->
+                    <div class="flex flex-col md:flex-row items-center mb-20 gap-8">
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1600566752227-17c0fd9eef4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Chef Alexandre Dubois" class="w-full h-auto rounded-lg shadow-lg">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h2 class="text-3xl font-playfair font-bold mb-6">Chef Alexandre Dubois</h2>
+                            <p class="text-gray-600 mb-4">Born in Lyon, France, Chef Dubois trained under some of Europe's most celebrated chefs before bringing his vision to North America.</p>
+                            <p class="text-gray-600 mb-6">His philosophy centers on respecting ingredients while innovating with technique, creating dishes that are both familiar and surprising.</p>
+                            <div class="flex items-center space-x-4">
+                                <a href="#" class="text-gold hover:underline" onclick="navigateTo('press')">Awards & Recognition</a>
+                                <span class="text-gray-400">|</span>
+                                <a href="#" class="text-gold hover:underline" onclick="navigateTo('blog')">Chef's Blog</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Values Section -->
+                    <div class="mb-20">
+                        <h2 class="text-3xl font-playfair font-bold mb-8 text-center">Our Values</h2>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            <div class="text-center p-6">
+                                <div class="text-gold text-4xl mb-4">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3">Seasonal & Sustainable</h3>
+                                <p class="text-gray-600">We work closely with local farmers and purveyors to source the freshest ingredients at their peak.</p>
+                            </div>
+                            <div class="text-center p-6">
+                                <div class="text-gold text-4xl mb-4">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3">Thoughtful Hospitality</h3>
+                                <p class="text-gray-600">Every guest is treated with genuine care and attention to create memorable experiences.</p>
+                            </div>
+                            <div class="text-center p-6">
+                                <div class="text-gold text-4xl mb-4">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-3">Continuous Innovation</h3>
+                                <p class="text-gray-600">We constantly evolve while staying true to our foundations of technique and flavor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Section -->
+                    <div>
+                        <h2 class="text-3xl font-playfair font-bold mb-8 text-center">Meet Our Team</h2>
+                        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <div class="text-center">
+                                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Team Member" class="w-full h-full object-cover">
+                                </div>
+                                <h3 class="font-semibold">Sophie Laurent</h3>
+                                <p class="text-gray-600 text-sm">General Manager</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1562788869-4ed32648eb72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Team Member" class="w-full h-full object-cover">
+                                </div>
+                                <h3 class="font-semibold">Marco Silva</h3>
+                                <p class="text-gray-600 text-sm">Head Sommelier</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Team Member" class="w-full h-full object-cover">
+                                </div>
+                                <h3 class="font-semibold">Élodie Moreau</h3>
+                                <p class="text-gray-600 text-sm">Pastry Chef</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=712&q=80" alt="Team Member" class="w-full h-full object-cover">
+                                </div>
+                                <h3 class="font-semibold">Thomas Wright</h3>
+                                <p class="text-gray-600 text-sm">Sous Chef</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Reservations Page -->
+        <div id="reservations-page" class="page hidden">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">Reservations</h1>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Book your table for an unforgettable dining experience</p>
+                    </div>
+                    
+                    <div class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-lg">
+                        <form>
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="date" class="block text-gray-700 mb-2">Date</label>
+                                    <input type="date" id="date" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                </div>
+                                <div>
+                                    <label for="time" class="block text-gray-700 mb-2">Time</label>
+                                    <select id="time" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                        <option value="">Select Time</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="17:30">5:30 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                        <option value="18:30">6:30 PM</option>
+                                        <option value="19:00">7:00 PM</option>
+                                        <option value="19:30">7:30 PM</option>
+                                        <option value="20:00">8:00 PM</option>
+                                        <option value="20:30">8:30 PM</option>
+                                        <option value="21:00">9:00 PM</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="party-size" class="block text-gray-700 mb-2">Party Size</label>
+                                    <select id="party-size" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                        <option value="1">1 Person</option>
+                                        <option value="2">2 People</option>
+                                        <option value="3">3 People</option>
+                                        <option value="4">4 People</option>
+                                        <option value="5">5 People</option>
+                                        <option value="6">6 People</option>
+                                        <option value="7">7 People</option>
+                                        <option value="8">8 People</option>
+                                        <option value="9">9+ People</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="occasion" class="block text-gray-700 mb-2">Occasion (Optional)</label>
+                                    <select id="occasion" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                        <option value="">None</option>
+                                        <option value="anniversary">Anniversary</option>
+                                        <option value="birthday">Birthday</option>
+                                        <option value="business">Business Dinner</option>
+                                        <option value="engagement">Engagement</option>
+                                        <option value="other">Other Celebration</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="special-requests" class="block text-gray-700 mb-2">Special Requests</label>
+                                <textarea id="special-requests" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold"></textarea>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+                                    <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                </div>
+                                <div class="flex items-end">
+                                    <button type="submit" class="w-full bg-gold text-white py-2 px-4 hover:bg-charcoal transition">Complete Reservation</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="mt-16 grid md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-8 rounded-lg">
+                            <h3 class="text-xl font-playfair font-semibold mb-4">Private Dining</h3>
+                            <p class="text-gray-600 mb-4">Our private dining room accommodates up to 20 guests for intimate gatherings, business dinners, and special celebrations.</p>
+                            <a href="#" class="text-gold hover:underline" onclick="navigateTo('events')">Learn More About Private Events →</a>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-lg">
+                            <h3 class="text-xl font-playfair font-semibold mb-4">Need Immediate Assistance?</h3>
+                            <p class="text-gray-600 mb-4">For same-day reservations or special requests, please call our reservations team.</p>
+                            <a href="tel:+15551234567" class="text-gold hover:underline">+1 (555) 123-4567</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Gallery Page -->
+        <div id="gallery-page" class="page hidden">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">Gallery</h1>
+                        <p class="text-gray-600 max-w-2xl mx-auto">A visual journey through our culinary creations and elegant atmosphere</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center mb-8 gap-2">
+                        <button class="px-4 py-2 bg-gold text-white" onclick="filterGallery('all')">All</button>
+                        <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100" onclick="filterGallery('food')">Food</button>
+                        <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100" onclick="filterGallery('interior')">Interior</button>
+                        <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100" onclick="filterGallery('events')">Events</button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="food">
+                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Dish" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="interior">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Restaurant Interior" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="food">
+                            <img src="https://images.unsplash.com/photo-1565299624943-b5fbc3e772b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Dish" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="events">
+                            <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Event" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="interior">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Dining Area" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="food">
+                            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Dish" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="events">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Event" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="interior">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Chef's Table" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg" data-category="food">
+                            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Dessert" class="w-full h-64 object-cover hover:scale-105 transition duration-500 cursor-pointer" onclick="openLightbox(this)">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact-page" class="page hidden">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">Contact Us</h1>
+                        <p class="text-gray-600 max-w-2xl mx-auto">We'd love to hear from you</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h2 class="text-2xl font-playfair font-semibold mb-6">Get in Touch</h2>
+                            <form class="space-y-6">
+                                <div>
+                                    <label for="contact-name" class="block text-gray-700 mb-2">Name</label>
+                                    <input type="text" id="contact-name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block text-gray-700 mb-2">Email</label>
+                                    <input type="email" id="contact-email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                </div>
+                                <div>
+                                    <label for="contact-subject" class="block text-gray-700 mb-2">Subject</label>
+                                    <select id="contact-subject" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold">
+                                        <option value="">Select a subject</option>
+                                        <option value="reservation">Reservation Inquiry</option>
+                                        <option value="private-dining">Private Dining</option>
+                                        <option value="feedback">Feedback</option>
+                                        <option value="press">Press Inquiry</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="contact-message" class="block text-gray-700 mb-2">Message</label>
+                                    <textarea id="contact-message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gold"></textarea>
+                                </div>
+                                <button type="submit" class="bg-gold text-white py-2 px-6 hover:bg-charcoal transition">Send Message</button>
+                            </form>
+                        </div>
+                        
+                        <div>
+                            <h2 class="text-2xl font-playfair font-semibold mb-6">Visit Us</h2>
+                            <div class="mb-8">
+                                <div class="h-64 bg-gray-200 rounded-lg overflow-hidden">
+                                    <!-- Map placeholder - in a real implementation you'd use Google Maps or similar -->
+                                    <div class="w-full h-full flex items-center justify-center bg-gray-100">
+                                        <span class="text-gray-500">Map would be displayed here</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="font-semibold mb-2">Address</h3>
+                                    <p class="text-gray-600">123 Culinary Avenue<br>New York, NY 10001</p>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="font-semibold mb-2">Contact Information</h3>
+                                    <p class="text-gray-600 mb-1"><i class="fas fa-phone-alt mr-2 text-gold"></i> +1 (555) 123-4567</p>
+                                    <p class="text-gray-600 mb-1"><i class="fas fa-envelope mr-2 text-gold"></i> info@eclatrestaurant.com</p>
+                                    <p class="text-gray-600"><i class="fab fa-whatsapp mr-2 text-gold"></i> +1 (555) 123-4567</p>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="font-semibold mb-2">Hours</h3>
+                                    <ul class="text-gray-600 space-y-1">
+                                        <li class="flex justify-between">
+                                            <span>Monday - Thursday</span>
+                                            <span>5:00 PM - 10:00 PM</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>Friday - Saturday</span>
+                                            <span>5:00 PM - 11:00 PM</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>Sunday</span>
+                                            <span>5:00 PM - 9:00 PM</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="font-semibold mb-2">Follow Us</h3>
+                                    <div class="flex space-x-4">
+                                        <a href="#" class="text-gold hover:text-charcoal"><i class="fab fa-instagram text-2xl"></i></a>
+                                        <a href="#" class="text-gold hover:text-charcoal"><i class="fab fa-facebook text-2xl"></i></a>
+                                        <a href="#" class="text-gold hover:text-charcoal"><i class="fab fa-twitter text-2xl"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Events Page -->
+        <div id="events-page" class="page hidden">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">Events & Private Dining</h1>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Create unforgettable moments in our elegant private spaces</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-12 mb-16">
+                        <div>
+                            <h2 class="text-2xl font-playfair font-semibold mb-6">Private Dining Room</h2>
+                            <p class="text-gray-600 mb-6">Our intimate private dining room accommodates up to 20 guests for business dinners, family celebrations, and special occasions. The space features:</p>
+                            <ul class="text-gray-600 space-y-2 mb-6">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                    <span>Customizable menus with wine pairing options</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                    <span>Dedicated service staff</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                    <span>AV equipment available</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                    <span>Flexible seating arrangements</span>
+                                </li>
+                            </ul>
+                            <a href="#" class="inline-block bg-gold text-white py-2 px-6 hover:bg-charcoal transition" onclick="navigateTo('reservations')">Inquire About Private Dining</a>
+                        </div>
+                        <div class
+</body>
+</html>
